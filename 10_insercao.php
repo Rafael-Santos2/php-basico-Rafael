@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <title>Cadastro de Clientes</title>
 </head>
+
 <body>
     <h2>Tela de cadastro</h2>
     <!-- método POST -->
@@ -12,7 +14,7 @@
         <input type="text" name="nome" required><br>
 
         <label for="email">Email:</label>
-        <input type="email" name="email" required><br>
+        <input type="email" name="email"><br>
 
         <button type="submit">Cadastrar</button>
     </form>
@@ -43,17 +45,19 @@
 
 
         // Confere se a variável 'sql' esta correta
-        if ($conn->query($sql) === TRUE){
+        if (!empty($nome) && !empty($email) && filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
             // exibe a mensagem
-            echo "<p style='color: green;'>Cliente cadastrado com sucesso!</p>";
-        } else{
-            echo "<p style='color: red;'>Erro ao cadastrar" . $conn->error . "</p>";
-        }
+            
+                echo "<p style='color: green;'>Cliente cadastrado com sucesso!</p>";
+            } else {
+                echo "<p style='color: red;'>Erro ao cadastrar" . $conn->error . "</p>";
+            }
 
-        // Encerra a conexão
-        $conn->close();
-    }
+            // Encerra a conexão
+            $conn->close();
+        }
     ?>
 </body>
+
 </html>
