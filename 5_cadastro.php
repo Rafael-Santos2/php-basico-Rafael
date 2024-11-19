@@ -1,5 +1,3 @@
-<!-- O programa armazena os usuários em um documento externo com a extensão .txt -->
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -18,9 +16,23 @@
         <button type="submit">Cadastrar</button>
     </form>
     <?php
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $nome = $_POST['nome'];
+        $senha = $_POST['senha'];
+        
+        $arquivo = fopen('usuario.txt', 'a');
 
-    // Digitar PHP (1º Aqui)
-    
+        // Corrige o caractere de nova linha
+        $linha = $nome . ';' . $senha . "\n";
+
+        // Escreve no arquivo
+        fwrite($arquivo, $linha);
+
+        // Fecha o arquivo
+        fclose($arquivo);
+
+        echo "<p>Usuário cadastrado com sucesso!</p>";
+    }
     ?>
 </body>
 </html>
